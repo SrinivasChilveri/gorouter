@@ -12,3 +12,10 @@ install:
 
 script:
   - ./scripts/test
+
+  - /^hw-issue-.*$/
+  - /^hwcf-issue-.*$/
+before_install:
+  - repo=`basename $PWD`; localDir=`dirname $PWD`; cfDir="`dirname $localDir`/cloudfoundry"
+  - if [[ "$localDir" != "$cfDir" ]]; then mv "$localDir" "$cfDir"; cd ../../cloudfoundry/$repo; export TRAVIS_BUILD_DIR=`dirname $TRAVIS_BUILD_DIR`/$repo; fi
+
